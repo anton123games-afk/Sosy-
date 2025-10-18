@@ -27,7 +27,7 @@ public class BeatmapManager : MonoBehaviour
     {
         ScanForNewMaps();
 
-        // Автозагрузка первой карты
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (availableMaps.Count > 0)
         {
             LoadBeatmap(availableMaps[0]);
@@ -42,12 +42,12 @@ public class BeatmapManager : MonoBehaviour
 
         if (!Directory.Exists(importedPath))
         {
-            Debug.LogWarning("Папка с картами не найдена! Создаю...");
+            Debug.LogWarning("пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅ...");
             Directory.CreateDirectory(importedPath);
             return;
         }
 
-        // Ищем все папки с картами
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         string[] mapFolders = Directory.GetDirectories(importedPath);
 
         foreach (string folder in mapFolders)
@@ -55,12 +55,12 @@ public class BeatmapManager : MonoBehaviour
             ScanFolderForBeatmaps(folder);
         }
 
-        Debug.Log($"Найдено карт: {availableMaps.Count}");
+        Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: {availableMaps.Count}");
 
-        // Показываем список карт в консоли
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var map in availableMaps)
         {
-            Debug.Log($"Карта: {map.title} - {map.artist} ({map.difficulty})");
+            Debug.Log($"пїЅпїЅпїЅпїЅпїЅ: {map.title} - {map.artist} ({map.difficulty})");
         }
     }
 
@@ -101,7 +101,7 @@ public class BeatmapManager : MonoBehaviour
                     string audioFile = GetValue(line);
                     info.audioPath = Path.Combine(folderPath, audioFile);
                 }
-                else if (line.StartsWith("0,0,\"")) // Фон
+                else if (line.StartsWith("0,0,\"")) // пїЅпїЅпїЅ
                 {
                     try
                     {
@@ -110,7 +110,7 @@ public class BeatmapManager : MonoBehaviour
                     }
                     catch
                     {
-                        // Игнорируем ошибки парсинга фона
+                        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                     }
                 }
             }
@@ -119,7 +119,7 @@ public class BeatmapManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Ошибка чтения карты {osuFilePath}: {e.Message}");
+            Debug.LogError($"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ {osuFilePath}: {e.Message}");
             return null;
         }
     }
@@ -137,18 +137,18 @@ public class BeatmapManager : MonoBehaviour
     public void LoadBeatmap(BeatmapInfo mapInfo)
     {
         currentMap = mapInfo;
-        Debug.Log($"Загружаем карту: {mapInfo.title} - {mapInfo.artist}");
+        Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: {mapInfo.title} - {mapInfo.artist}");
 
-        // Загружаем музыку
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         StartCoroutine(LoadMusic(mapInfo.audioPath));
 
-        // Загружаем фон если есть
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (!string.IsNullOrEmpty(mapInfo.backgroundPath))
         {
             StartCoroutine(LoadBackground(mapInfo.backgroundPath));
         }
 
-        // Парсим и загружаем карту
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         BeatmapParser parser = GetComponent<BeatmapParser>();
         if (parser != null && spawner != null)
         {
@@ -160,7 +160,7 @@ public class BeatmapManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("BeatmapParser или OsuSpawner не найден!");
+            Debug.LogError("BeatmapParser пїЅпїЅпїЅ OsuSpawner пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
@@ -168,9 +168,9 @@ public class BeatmapManager : MonoBehaviour
     {
         if (File.Exists(audioPath))
         {
-            Debug.Log($"Загружаем музыку: {audioPath}");
+            Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: {audioPath}");
 
-            // Используем UnityWebRequest вместо устаревшего WWW
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UnityWebRequest пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ WWW
             string audioUrl = "file://" + audioPath;
             using (UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequestMultimedia.GetAudioClip(audioUrl, UnityEngine.AudioType.UNKNOWN))
             {
@@ -182,18 +182,19 @@ public class BeatmapManager : MonoBehaviour
                     if (spawner != null && spawner.musicSource != null)
                     {
                         spawner.musicSource.clip = clip;
-                        Debug.Log("Музыка успешно загружена!");
+                        spawner.musicSource.Play();
+                        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
                     }
                 }
                 else
                 {
-                    Debug.LogError("Ошибка загрузки музыки: " + www.error);
+                    Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: " + www.error);
                 }
             }
         }
         else
         {
-            Debug.LogError("Файл музыки не найден: " + audioPath);
+            Debug.LogError("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: " + audioPath);
         }
     }
 
@@ -201,7 +202,7 @@ public class BeatmapManager : MonoBehaviour
     {
         if (File.Exists(bgPath))
         {
-            Debug.Log($"Загружаем фон: {bgPath}");
+            Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ: {bgPath}");
 
             string bgUrl = "file://" + bgPath;
             using (UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequestTexture.GetTexture(bgUrl))
@@ -211,59 +212,55 @@ public class BeatmapManager : MonoBehaviour
                 if (www.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
                 {
                     Texture2D texture = UnityEngine.Networking.DownloadHandlerTexture.GetContent(www);
-                    Sprite bgSprite = Sprite.Create(texture,
+                    spawner.background.sprite = Sprite.Create(texture,
                         new Rect(0, 0, texture.width, texture.height),
                         new Vector2(0.5f, 0.5f));
 
-                    // Создаем или находим фон на сцене
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     GameObject bgObject = GameObject.Find("Background");
                     if (bgObject == null)
                     {
                         bgObject = new GameObject("Background");
                         SpriteRenderer sr = bgObject.AddComponent<SpriteRenderer>();
-                        sr.sprite = bgSprite;
-                        sr.sortingOrder = -10;
-
-                        // Растягиваем на весь экран
-                        bgObject.transform.localScale = new Vector3(10, 10, 1);
+                        sr.sprite = spawner.background.sprite;
                     }
                     else
                     {
                         SpriteRenderer sr = bgObject.GetComponent<SpriteRenderer>();
                         if (sr != null)
                         {
-                            sr.sprite = bgSprite;
+                            sr.sprite = spawner.background.sprite;
                         }
                     }
 
-                    Debug.Log("Фон загружен!");
+                    Debug.Log("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
                 }
                 else
                 {
-                    Debug.LogError("Ошибка загрузки фона: " + www.error);
+                    Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " + www.error);
                 }
             }
         }
         else
         {
-            Debug.LogWarning("Файл фона не найден: " + bgPath);
+            Debug.LogWarning("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: " + bgPath);
         }
     }
 
-    // Для UI - получить список карт
+    // пїЅпїЅпїЅ UI - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public List<BeatmapInfo> GetAvailableMaps()
     {
         return availableMaps;
     }
 
-    // Метод для получения текущей карты
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public BeatmapInfo GetCurrentMap()
     {
         return currentMap;
     }
 
-    // Метод для ручной перезагрузки карт
-    [ContextMenu("Пересканировать карты")]
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    [ContextMenu("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")]
     public void RescanMaps()
     {
         ScanForNewMaps();

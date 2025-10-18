@@ -44,7 +44,7 @@ public class HitCircle : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if (!wasClicked)
         {

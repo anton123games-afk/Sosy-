@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OsuSpawner : MonoBehaviour
 {
     public GameObject circlePrefab;
     public AudioSource musicSource;
+    public Image background;
 
     private BeatmapData currentBeatmap;
     private int currentObjectIndex = 0;
@@ -18,7 +20,7 @@ public class OsuSpawner : MonoBehaviour
         currentObjectIndex = 0;
         isPrepared = true;
 
-        Debug.Log($"Карта подготовлена: {beatmap.hitObjects.Count} нот");
+        Debug.Log($"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {beatmap.hitObjects.Count} пїЅпїЅпїЅ");
 
         Invoke("StartGame", 3f);
     }
@@ -27,7 +29,7 @@ public class OsuSpawner : MonoBehaviour
     {
         if (!isPrepared || currentBeatmap == null)
         {
-            Debug.LogError("Карта не подготовлена!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
             return;
         }
 
@@ -39,7 +41,7 @@ public class OsuSpawner : MonoBehaviour
         }
 
         isPlaying = true;
-        Debug.Log("Игра началась!");
+        Debug.Log("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
     }
 
     void Update()
@@ -82,8 +84,8 @@ public class OsuSpawner : MonoBehaviour
             circleScript.hitTime = hitObj.time;
             circleScript.approachTime = 2f;
 
-            // УБИРАЕМ ЭТУ ЧАСТЬ - скин автоматически применится в HitCircle.Start()
-            // HitCircle сам знает какой скин применять через ApplyCurrentSkin()
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ HitCircle.Start()
+            // HitCircle пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ ApplyCurrentSkin()
         }
     }
 
@@ -97,7 +99,7 @@ public class OsuSpawner : MonoBehaviour
     void EndGame()
     {
         isPlaying = false;
-        Debug.Log("Игра завершена!");
+        Debug.Log("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
     }
 
     public void StopGame()
