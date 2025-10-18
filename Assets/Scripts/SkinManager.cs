@@ -4,15 +4,15 @@ using System.IO;
 
 public class SkinManager : MonoBehaviour
 {
-    // [System.Serializable]
-    // public class Skin
-    // {
-    //     public string skinName;
-    //     public Sprite hitCircle;
-    //     public Sprite approachCircle;
-    //     public Color hitCircleColor = Color.white;
-    //     public Color approachCircleColor = Color.white;
-    // }
+    [System.Serializable]
+    public class Skin
+    {
+        public string skinName;
+        public Sprite hitCircle;
+        public Sprite approachCircle;
+        public Color hitCircleColor = Color.white;
+        public Color approachCircleColor = Color.white;
+    }
 
     // ДОБАВЛЯЕМ КЛАСС OsuSkin
     [System.Serializable]
@@ -36,16 +36,13 @@ public class SkinManager : MonoBehaviour
         public Sprite hit100;
         public Sprite hit50;
         public Sprite hit0; // miss
-
-        public Color hitCircleColor = Color.white;
-        public Color approachCircleColor = Color.white;
     }
 
     public static SkinManager Instance;
 
     [Header("Available Skins")]
-    public List<OsuSkin> skins = new List<OsuSkin>();
-    public OsuSkin currentSkin;
+    public List<Skin> skins = new List<Skin>();
+    public Skin currentSkin;
 
     [Header("Osu Skins")]
     public List<OsuSkin> availableOsuSkins = new List<OsuSkin>();
@@ -61,7 +58,7 @@ public class SkinManager : MonoBehaviour
     void CreateDefaultSkins()
     {
         // Красный скин по умолчанию
-        OsuSkin redSkin = new OsuSkin();
+        Skin redSkin = new Skin();
         redSkin.skinName = "Red Skin";
         redSkin.hitCircle = CreateCircleSprite(Color.red, 128);
         redSkin.approachCircle = CreateHollowSprite(Color.green, 128);
@@ -70,7 +67,7 @@ public class SkinManager : MonoBehaviour
         skins.Add(redSkin);
 
         // Синий скин
-        OsuSkin blueSkin = new OsuSkin();
+        Skin blueSkin = new Skin();
         blueSkin.skinName = "Blue Skin";
         blueSkin.hitCircle = CreateCircleSprite(Color.blue, 128);
         blueSkin.approachCircle = CreateHollowSprite(Color.cyan, 128);
@@ -175,7 +172,7 @@ public class SkinManager : MonoBehaviour
 
     public void SetSkin(string skinName)
     {
-        OsuSkin newSkin = skins.Find(s => s.skinName == skinName);
+        Skin newSkin = skins.Find(s => s.skinName == skinName);
         if (newSkin != null)
         {
             currentSkin = newSkin;
@@ -216,7 +213,7 @@ public class SkinManager : MonoBehaviour
     public List<string> GetSkinNames()
     {
         List<string> names = new List<string>();
-        foreach (OsuSkin skin in skins)
+        foreach (Skin skin in skins)
         {
             names.Add(skin.skinName);
         }

@@ -10,10 +10,7 @@ public class OszExtractor : MonoBehaviour
 
     void Start()
     {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
         CreateFolders();
-
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         StartCoroutine(MonitorBeatmapsFolder());
     }
 
@@ -28,7 +25,7 @@ public class OszExtractor : MonoBehaviour
         if (!Directory.Exists(importedPath))
             Directory.CreateDirectory(importedPath);
 
-        Debug.Log("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+        Debug.Log("Папки для карт созданы!");
     }
 
     IEnumerator MonitorBeatmapsFolder()
@@ -36,7 +33,7 @@ public class OszExtractor : MonoBehaviour
         while (true)
         {
             CheckForNewOszFiles();
-            yield return new WaitForSeconds(2f); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            yield return new WaitForSeconds(3f); // Проверяем каждые 3 секунды
         }
     }
 
@@ -47,7 +44,7 @@ public class OszExtractor : MonoBehaviour
 
         foreach (string oszFile in oszFiles)
         {
-            Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ .osz пїЅпїЅпїЅпїЅ: {Path.GetFileName(oszFile)}");
+            Debug.Log($"Найден новый .osz файл: {Path.GetFileName(oszFile)}");
             ExtractOszFile(oszFile);
         }
     }
@@ -59,39 +56,56 @@ public class OszExtractor : MonoBehaviour
             string fileName = Path.GetFileNameWithoutExtension(oszPath);
             string extractPath = Path.Combine(Application.dataPath, importedFolder, fileName);
 
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             if (!Directory.Exists(extractPath))
                 Directory.CreateDirectory(extractPath);
 
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ .osz (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ zip пїЅпїЅпїЅпїЅпїЅ)
+            // Распаковываем архив
             using (ZipArchive archive = ZipFile.OpenRead(oszPath))
             {
                 foreach (ZipArchiveEntry entry in archive.Entries)
                 {
                     string entryPath = Path.Combine(extractPath, entry.Name);
-
-                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                     entry.ExtractToFile(entryPath, true);
-                    Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {entry.Name}");
                 }
             }
 
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ .osz пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-            string processedPath = Path.Combine(Application.dataPath, importedFolder, "processed", Path.GetFileName(oszPath));
-            string processedDir = Path.GetDirectoryName(processedPath);
+            Debug.Log($"Карта {fileName} успешно распакована!");
+
+            // Перемещаем обработанный файл
+            string processedDir = Path.Combine(Application.dataPath, importedFolder, "processed");
             if (!Directory.Exists(processedDir))
                 Directory.CreateDirectory(processedDir);
 
+            string processedPath = Path.Combine(processedDir, Path.GetFileName(oszPath));
             File.Move(oszPath, processedPath);
 
-            Debug.Log($"пїЅпїЅпїЅпїЅпїЅ {fileName} пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+            // Уведомляем в консоль
+            Debug.Log($"Карта {fileName} готова к использованию! Перезапусти игру или нажми 'Rescan Maps' в BeatmapManager.");
 
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-            GameObject.Find("BeatmapManager").GetComponent<BeatmapData>().ScanForNewMaps();
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {e.Message}");
+            Debug.LogError($"Ошибка распаковки: {e.Message}");
         }
+    }
+
+    [ContextMenu("Открыть папку Beatmaps")]
+    public void OpenBeatmapsFolder()
+    {
+        string beatmapsPath = Path.Combine(Application.dataPath, beatmapsFolder);
+        if (Directory.Exists(beatmapsPath))
+        {
+            Application.OpenURL("file://" + beatmapsPath);
+        }
+        else
+        {
+            Debug.LogWarning("Папка Beatmaps не найдена!");
+        }
+    }
+
+    [ContextMenu("Проверить карты сейчас")]
+    public void CheckNow()
+    {
+        CheckForNewOszFiles();
     }
 }

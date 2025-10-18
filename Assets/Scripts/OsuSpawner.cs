@@ -20,7 +20,6 @@ public class OsuSpawner : MonoBehaviour
 
         Debug.Log($"Карта подготовлена: {beatmap.hitObjects.Count} нот");
 
-        // Автоматически начинаем через 3 секунды
         Invoke("StartGame", 3f);
     }
 
@@ -38,13 +37,8 @@ public class OsuSpawner : MonoBehaviour
         {
             musicSource.Play();
         }
-        else
-        {
-            Debug.LogWarning("Музыка не загружена!");
-        }
 
         isPlaying = true;
-
         Debug.Log("Игра началась!");
     }
 
@@ -54,11 +48,10 @@ public class OsuSpawner : MonoBehaviour
 
         float currentMusicTime = Time.time - songStartTime;
 
-        // Спавним ноты которые должны появиться
         while (currentObjectIndex < currentBeatmap.hitObjects.Count)
         {
             HitObjectData nextObj = currentBeatmap.hitObjects[currentObjectIndex];
-            float spawnTime = nextObj.time - 2f; // За 2 секунды до удара
+            float spawnTime = nextObj.time - 2f;
 
             if (currentMusicTime >= spawnTime)
             {
@@ -71,7 +64,6 @@ public class OsuSpawner : MonoBehaviour
             }
         }
 
-        // Проверяем конец песни
         if (currentObjectIndex >= currentBeatmap.hitObjects.Count &&
             (musicSource == null || !musicSource.isPlaying))
         {
@@ -87,15 +79,11 @@ public class OsuSpawner : MonoBehaviour
         HitCircle circleScript = circle.GetComponent<HitCircle>();
         if (circleScript != null)
         {
-            // Устанавливаем время удара
             circleScript.hitTime = hitObj.time;
             circleScript.approachTime = 2f;
 
-            // Применяем osu скин если есть
-            if (SkinManager.Instance != null && SkinManager.Instance.currentSkin != null)
-            {
-                circleScript.ApplyOsuSkin(SkinManager.Instance.currentSkin);
-            }
+            // УБИРАЕМ ЭТУ ЧАСТЬ - скин автоматически применится в HitCircle.Start()
+            // HitCircle сам знает какой скин применять через ApplyCurrentSkin()
         }
     }
 
@@ -110,13 +98,6 @@ public class OsuSpawner : MonoBehaviour
     {
         isPlaying = false;
         Debug.Log("Игра завершена!");
-
-        if (ScoreManager.Instance != null)
-        {
-            int score = ScoreManager.Instance.score;
-            int maxCombo = ScoreManager.Instance.maxCombo;
-            Debug.Log($"Финальный счет: {score} | Макс. комбо: {maxCombo}x");
-        }
     }
 
     public void StopGame()
@@ -126,6 +107,5 @@ public class OsuSpawner : MonoBehaviour
         {
             musicSource.Stop();
         }
-        Debug.Log("Игра остановлена");
     }
 }

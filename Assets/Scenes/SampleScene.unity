@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &61073393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61073394}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &61073394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61073393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1014, y: -0.21837, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +417,33 @@ MonoBehaviour:
   currentSkin:
     skinName: Default
     hitCircle: {fileID: 229050469958988477, guid: 1d141ed57e9e7c64fb10df73271bec12, type: 3}
+    approachCircle: {fileID: 0}
     hitCircleColor: {r: 1, g: 1, b: 1, a: 1}
+    approachCircleColor: {r: 1, g: 1, b: 1, a: 1}
+  availableOsuSkins: []
+  currentOsuSkin:
+    skinName: 
+    folderPath: 
+    hitCircle: {fileID: 0}
+    approachCircle: {fileID: 0}
+    cursor: {fileID: 0}
+    cursorTrail: {fileID: 0}
+    followPoint: {fileID: 0}
+    comboNumbers:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    hit300: {fileID: 0}
+    hit100: {fileID: 0}
+    hit50: {fileID: 0}
+    hit0: {fileID: 0}
 --- !u!114 &1028392314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +681,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793621008}
   m_CullTransparentMesh: 1
+--- !u!1 &1991079976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1991079978}
+  - component: {fileID: 1991079979}
+  - component: {fileID: 1991079981}
+  - component: {fileID: 1991079980}
+  m_Layer: 0
+  m_Name: BeatmapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1991079978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991079976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1014, y: -0.21837, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1991079979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991079976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed39b21df11e1f45a2010e6a7521e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OszExtractor
+  beatmapsFolder: Beatmaps
+  importedFolder: Imported
+--- !u!114 &1991079980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991079976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a331bc1531c440499a4f162adaa90cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeatmapManager
+  spawner: {fileID: 0}
+  importedFolder: Imported
+--- !u!114 &1991079981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991079976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27892e8ff30443d4c9509a05151318c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeatmapParser
 --- !u!1 &2064585545
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +832,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -738,3 +868,5 @@ SceneRoots:
   - {fileID: 1046142128}
   - {fileID: 2064585549}
   - {fileID: 687451187}
+  - {fileID: 1991079978}
+  - {fileID: 61073394}

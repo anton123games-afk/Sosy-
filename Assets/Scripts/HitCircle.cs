@@ -111,7 +111,7 @@ public class HitCircle : MonoBehaviour
     }
 
     // Метод для обычных скинов
-    public void ApplySkin(SkinManager.OsuSkin skin)
+    public void ApplySkin(SkinManager.Skin skin)
     {
         if (circleRenderer != null)
         {

@@ -19,12 +19,12 @@ public class HitObjectData
     public float time;
     public int type;
     public int soundType;
-
+    
     // Для слайдеров
     public string sliderType;
     public int repeat;
     public float pixelLength;
-
+    
     // Для спиннеров
     public float endTime;
 }
