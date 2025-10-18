@@ -206,6 +206,6 @@ ProgressBar
 DeltaSpeed
 IValueField<>
 TextValueField<>
-TextValueFieldTraits<,>
 BaseFieldMouseDragger
 FieldMouseDragger<>
+TextValueFieldTraits<,>

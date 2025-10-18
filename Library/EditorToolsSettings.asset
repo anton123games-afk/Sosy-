@@ -13,21 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.EditorToolsSettingsData
   m_GroupsSettingsList:
-  - groupType: UnityEngine.Rendering.Universal.DecalProjector, Unity.RenderPipelines.Universal.Runtime,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.Rendering.Universal.ShadowCaster2D, Unity.RenderPipelines.Universal.2D.Runtime,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.Rendering.Universal.Light2D, Unity.RenderPipelines.Universal.2D.Runtime,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.Light, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.LightAnchor, Unity.RenderPipelines.Core.Runtime, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
   - groupType: UnityEngine.U2D.SpriteShapeController, Unity.2D.SpriteShape.Runtime,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     collapsed: 0

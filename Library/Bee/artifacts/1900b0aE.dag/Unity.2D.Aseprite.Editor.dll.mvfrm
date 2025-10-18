@@ -3,24 +3,6 @@ UnityEditor
 GridBrushEditor
 GridBrushEditorBase
 GridSelection
-CinemachineUniversalPixelPerfect
-UnityEngine
-Experimental
-Rendering
-Universal
-Light2D
-Light2DBlendStyle
-PixelPerfectCamera
-Renderer2DData
-RenderObjectsPass
-UnityEngine
-Experimental
-Rendering
-Universal
-FullScreenPassRendererFeature
-
-RenderQueueType
-RenderObjects
 AssetModificationProcessor
 
 Sysroot
@@ -219,6 +201,6 @@ ProgressBar
 DeltaSpeed
 IValueField<>
 TextValueField<>
-TextValueFieldTraits<,>
 BaseFieldMouseDragger
 FieldMouseDragger<>
+TextValueFieldTraits<,>
